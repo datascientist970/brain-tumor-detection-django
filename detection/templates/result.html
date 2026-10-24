@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection Report</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e9f7fc;
+            padding: 50px;
+            font-family: Arial, sans-serif;
+        }
+        .report-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+        .report-section {
+            margin-bottom: 20px;
+            padding-left:10px;
+        }
+        .report-title {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #0056b3;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+            border-radius:8px;
+            padding-left:40%;
+            padding-top:15px;
+        }
+        .happy {
+            color: #28a745;
+        }
+        .sad {
+            color: #dc3545;
+        }
+        .top-note {
+            padding-top:0;
+            background-color: #d6f0ff;
+            padding: 20px;
+            width: 100%;
+            border-bottom:2px solid black;
+        }
+        .note {
+            color:red;
+            text-align: left;
+            margin-top: 20px;
+            background-color: #d6f0ff;
+            padding: 20px;
+            border-top:2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <div class="top-note">
+            <h2 class="text-center mb-4"><strong>Brain MRI Report</strong></h2>
+        </div>
+        
+        <img src="{{ image_url }}" alt="Uploaded Image">
+
+        <div class="report-section">
+            <div class="report-title">Prediction Result:</div>
+            {% if result == 'yes' %}
+                <h4><p class="sad"><strong> BRAIN TUMOR DETECTED 😢</strong></p></h4>
+            {% else %}
+                <h4><p class="happy"><strong> NO BRAIN TUMOR DETECTED 😊</strong></p></h4>
+            {% endif %}
+        </div>
+
+        {% if result == 'yes' %}
+        <div class="report-section">
+            <div class="report-title">Tumor Area:</div>
+            <p>Area: <strong style="background-color:yellow;"><u>  {{ area_mm2|floatformat:2  }} mm² </u></strong></p>
+        </div>
+
+        <div class="report-section">
+            <div class="report-title">Recommendations:</div>
+            <p>We recommend consulting with a healthcare professional for further evaluation. Regular follow-ups and additional diagnostic tests may be needed.</p>
+        </div>
+
+        <div class="report-section">
+            <div class="report-title">Suggested Medication:</div>
+            <p>The specific treatment plan, including medication, will be determined by your healthcare provider based on a detailed assessment.</p>
+        </div>
+
+        <div class="report-section">
+            <div class="report-title">Cautions:</div>
+            <ul>
+                <li>Avoid strenuous activities.</li>
+                <li>Follow up regularly with your doctor.</li>
+                <li>Adhere to prescribed medication and lifestyle changes.</li>
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="note mb-8">
+            <strong>Note:</strong>
+            <i>This report is AI-generated and should be reviewed by a healthcare professional.</i>
+        </div>
+
+      
+    </div>
+</body>
+</html>
